@@ -1,12 +1,8 @@
 import React from "react";
-
 import { auth } from "@/auth";
-
 import SigninButton from "../SigninButton/SigninButton";
-
 export default async function UserButton() {
   const session = await auth();
-
   let imgPath =
     "https://upload.wikimedia.org/wikipedia/commons/2/2e/Microsoft_Account_Logo.svg";
 
