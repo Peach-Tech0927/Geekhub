@@ -15,7 +15,7 @@ export default async function UserButton() {
     </div>
   ) : (
     <div>
-      <p>認証に成功</p>
+      <pre>{JSON.stringify(session, null, 2)}</pre>
       <img src={imgPath} />
     </div>
   );
