@@ -1,5 +1,3 @@
-//  Geekhub/app/serverActions/serverAction.ts
-
 "use server";
 
 import { signIn } from "@/auth";

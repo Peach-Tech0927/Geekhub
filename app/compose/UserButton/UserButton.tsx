@@ -1,4 +1,3 @@
-//  Geekhub/app/compose/UserButton/UserButton.tsx
 import React from "react";
 
 import { auth } from "@/auth";
