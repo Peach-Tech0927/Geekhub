@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { main } from "../route";
 import { PrismaClient } from "@prisma/client";
-
 const prisma = new PrismaClient();
 //ブログ詳細記事取得api
 export const GET = async (req: Request, res: NextResponse) => {
@@ -17,13 +16,17 @@ export const GET = async (req: Request, res: NextResponse) => {
   }
 };
 
-//ブログ投稿用API
-export const POST = async (req: Request, res: NextResponse) => {
+//ブログ編集用API
+export const PUT = async (req: Request, res: NextResponse) => {
   try {
+    const id: number = parseInt(req.url.split("/blog/")[1]);
     const { title, description } = await req.json();
     await main();
-    const post = await prisma.post.create({ data: { title, description } });
-    return NextResponse.json({ message: "Success", post }, { status: 201 });
+    const post = await prisma.post.update({
+      data: { title, description },
+      where: { id },
+    });
+    return NextResponse.json({ message: "Success", post }, { status: 200 });
   } catch (err) {
     return NextResponse.json({ message: "Error", err }, { status: 500 });
   } finally {
@@ -34,6 +37,7 @@ export const POST = async (req: Request, res: NextResponse) => {
 export const DELETE = async (req: Request, res: NextResponse) => {
   try {
     const id: number = parseInt(req.url.split("/blog/")[1]);
+
     await main();
     const post = await prisma.post.delete({
       where: { id },
