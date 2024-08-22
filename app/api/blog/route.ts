@@ -1,14 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import prismadb from "@/app/lib/prisma";
 import { NextResponse } from "next/server";
-
-declare global {
-  var prisma: PrismaClient | undefined;
-}
-
-const prismadb = globalThis.prisma || new PrismaClient();
-if (process.env.NODE_ENV !== "production") globalThis.prisma = prismadb;
-
-export default prismadb;
 
 // ブログの全記事取得
 export const GET = async (req: Request, res: NextResponse) => {
