@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
-import prismadb from "@/app/lib/prisma";
+import database from "@/app/lib/prisma";
 
 //投稿詳細記事取得api
 export const GET = async (req: Request, res: NextResponse) => {
   try {
     const id: number = parseInt(req.url.split("/blog/")[1]);
-    const post = await prismadb.post.findFirst({ where: { id } }); //http://localhost:3000
+    const post = await database.post.findFirst({ where: { id } }); //http://localhost:3000
     return NextResponse.json({ message: "Success", post }, { status: 200 });
   } catch (err) {
     return NextResponse.json({ message: "Error", err }, { status: 500 });
@@ -17,7 +17,7 @@ export const PUT = async (req: Request, res: NextResponse) => {
   try {
     const id: number = parseInt(req.url.split("/blog/")[1]);
     const { title, description } = await req.json();
-    const post = await prismadb.post.update({
+    const post = await database.post.update({
       data: { title, description },
       where: { id },
     });
@@ -30,7 +30,7 @@ export const PUT = async (req: Request, res: NextResponse) => {
 export const DELETE = async (req: Request, res: NextResponse) => {
   try {
     const id: number = parseInt(req.url.split("/blog/")[1]);
-    const post = await prismadb.post.delete({
+    const post = await database.post.delete({
       where: { id },
     });
     return NextResponse.json({ message: "Success", post }, { status: 200 });
