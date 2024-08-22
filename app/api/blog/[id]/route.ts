@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import prismadb from "@/app/lib/prisma";
 
-//ブログ詳細記事取得api
+//投稿詳細記事取得api
 export const GET = async (req: Request, res: NextResponse) => {
   try {
     const id: number = parseInt(req.url.split("/blog/")[1]);
@@ -12,7 +12,7 @@ export const GET = async (req: Request, res: NextResponse) => {
   }
 };
 
-//ブログ編集用API
+//投稿編集用API
 export const PUT = async (req: Request, res: NextResponse) => {
   try {
     const id: number = parseInt(req.url.split("/blog/")[1]);
@@ -26,7 +26,7 @@ export const PUT = async (req: Request, res: NextResponse) => {
     return NextResponse.json({ message: "Error", err }, { status: 500 });
   }
 };
-//削除用API
+//投稿削除用API
 export const DELETE = async (req: Request, res: NextResponse) => {
   try {
     const id: number = parseInt(req.url.split("/blog/")[1]);
