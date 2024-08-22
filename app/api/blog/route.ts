@@ -13,7 +13,7 @@ export default prismadb;
 // ブログの全記事取得
 export const GET = async (req: Request, res: NextResponse) => {
   try {
-    const posts = prismadb.post.findMany();
+    const posts = await prismadb.post.findMany();
     return NextResponse.json({ message: "Success", posts }, { status: 200 });
   } catch (err) {
     return NextResponse.json({ message: "Error", err }, { status: 500 });
